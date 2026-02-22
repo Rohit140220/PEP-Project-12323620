@@ -1,0 +1,182 @@
+/* Container and Layout */
+.profile-container {
+  animation: fadeIn 0.4s ease-in-out;
+}
+
+.title-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 600px;
+  margin-bottom: 25px;
+}
+
+/* Page Title handles both the flex row and standard views */
+.page-title {
+  font-size: 28px;
+  color: #0f172a;
+  letter-spacing: -0.5px;
+  margin-bottom: 25px;
+}
+
+.profile-card {
+  background: white;
+  padding: 40px;
+  border-radius: 16px;
+  max-width: 600px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+  border: 1px solid #f1f5f9;
+}
+
+/* Profile Header & Avatar */
+.profile-header {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  margin-bottom: 35px;
+  padding-bottom: 30px;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.avatar {
+  width: 80px;
+  height: 80px;
+  color: white;
+  font-size: 32px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.avatar-admin { background: #0284c7; }
+.avatar-user { background: #10b981; }
+
+.profile-title h2 {
+  font-size: 24px;
+  color: #0f172a;
+  margin-bottom: 8px;
+}
+
+/* Badges */
+.role-badge {
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 700;
+  display: inline-block;
+}
+
+.admin-badge {
+  background: #fef2f2;
+  color: #dc2626;
+  border: 1px solid #fecaca;
+}
+
+.user-badge {
+  background: #f0fdf4;
+  color: #16a34a;
+  border: 1px solid #bbf7d0;
+}
+
+/* Profile Data Details */
+.profile-details {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.detail-group label {
+  font-size: 12px;
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  font-weight: 700;
+  margin-bottom: 6px;
+  display: block;
+}
+
+.detail-group p {
+  font-size: 16px;
+  color: #1e293b;
+  font-weight: 500;
+}
+
+/* Form Styles for Visitor Profile Creation/Editing */
+.profile-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form-group label {
+  font-weight: 600;
+  color: #475569;
+  font-size: 14px;
+}
+
+.form-group input {
+  padding: 14px;
+  border: 1px solid #cbd5e1;
+  border-radius: 10px;
+  font-size: 15px;
+  color: #0f172a;
+  background-color: #f8fafc;
+  transition: all 0.3s ease;
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: #38bdf8;
+  background-color: white;
+  box-shadow: 0 0 0 4px rgba(56, 189, 248, 0.1);
+}
+
+.form-actions {
+  display: flex;
+  gap: 15px;
+  margin-top: 10px;
+}
+
+.btn-save, .btn-edit, .btn-cancel {
+  padding: 14px 20px;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 15px;
+  border: none;
+  transition: all 0.2s;
+}
+
+.btn-save {
+  background: #10b981;
+  color: white;
+  flex-grow: 1;
+}
+
+.btn-save:hover { background: #059669; }
+
+.btn-edit {
+  background: #f1f5f9;
+  color: #0f172a;
+  border: 1px solid #cbd5e1;
+}
+
+.btn-edit:hover { background: #e2e8f0; }
+
+.btn-cancel {
+  background: #fef2f2;
+  color: #dc2626;
+  border: 1px solid #fecaca;
+}
+
+.btn-cancel:hover { background: #fee2e2; }

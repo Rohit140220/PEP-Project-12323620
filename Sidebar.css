@@ -1,0 +1,106 @@
+/* Core Sidebar Layout */
+.sidebar {
+  width: 250px;
+  background-color: #1e293b;
+  color: white;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* Top Navigation Section */
+.sidebar-top {
+  padding-top: 20px;
+}
+
+.sidebar-top h2 {
+  padding: 0 20px 5px;
+  margin-bottom: 5px;
+  color: #38bdf8;
+}
+
+/* Go Home Button Styling */
+.go-home-btn {
+  color: #94a3b8;
+  font-size: 13px;
+  padding: 0 20px 20px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  transition: color 0.2s;
+  border-bottom: 1px solid #334155;
+}
+
+.go-home-btn:hover {
+  color: white;
+}
+
+.sidebar-top ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* The Navigation "Buttons" (List Items) */
+.sidebar-top li {
+  padding: 15px 20px;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+  font-size: 16px;
+}
+
+.sidebar-top li:hover {
+  background-color: #334155;
+}
+
+.sidebar-top li.active {
+  background-color: #38bdf8;
+  color: #0f172a;
+  font-weight: bold;
+}
+
+/* Bottom Role Simulator Section */
+.role-simulator {
+  padding: 20px;
+  background-color: #0f172a;
+  border-top: 1px solid #334155;
+  text-align: center;
+  font-size: 14px;
+}
+
+.role-simulator p {
+  margin-bottom: 10px;
+  color: #94a3b8;
+}
+
+.role-simulator strong {
+  color: #f8fafc;
+}
+
+.role-btn {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: all 0.3s;
+}
+
+.admin-active {
+  background-color: #ef4444;
+  color: white;
+}
+
+.admin-active:hover {
+  background-color: #dc2626;
+}
+
+.user-active {
+  background-color: #10b981;
+  color: white;
+}
+
+.user-active:hover {
+  background-color: #059669;
+}
