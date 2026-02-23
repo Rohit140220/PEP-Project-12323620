@@ -1,106 +1,179 @@
 /* Core Sidebar Layout */
 .sidebar {
-  width: 250px;
-  background-color: #1e293b;
-  color: white;
+  width: 260px; /* Slightly wider for better text fit */
+  background-color: #0f172a; /* Deeper, richer navy black */
+  color: #94a3b8;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  border-right: 1px solid #1e293b;
 }
 
-/* Top Navigation Section */
+/* --- Brand Header --- */
 .sidebar-top {
   padding-top: 20px;
 }
 
-.sidebar-top h2 {
-  padding: 0 20px 5px;
-  margin-bottom: 5px;
-  color: #38bdf8;
+.sidebar-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 0 25px 20px;
 }
 
-/* Go Home Button Styling */
-.go-home-btn {
-  color: #94a3b8;
-  font-size: 13px;
-  padding: 0 20px 20px;
-  margin-bottom: 10px;
-  cursor: pointer;
-  transition: color 0.2s;
-  border-bottom: 1px solid #334155;
+.brand-icon {
+  font-size: 24px;
+  background: #38bdf8;
+  border-radius: 8px;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 10px rgba(56, 189, 248, 0.2);
 }
 
-.go-home-btn:hover {
-  color: white;
-}
-
-.sidebar-top ul {
-  list-style: none;
-  padding: 0;
+.sidebar-brand h2 {
+  color: #f8fafc;
+  font-size: 20px;
+  letter-spacing: -0.5px;
   margin: 0;
 }
 
-/* The Navigation "Buttons" (List Items) */
-.sidebar-top li {
-  padding: 15px 20px;
-  cursor: pointer;
-  transition: background 0.2s, color 0.2s;
-  font-size: 16px;
-}
-
-.sidebar-top li:hover {
-  background-color: #334155;
-}
-
-.sidebar-top li.active {
-  background-color: #38bdf8;
-  color: #0f172a;
-  font-weight: bold;
-}
-
-/* Bottom Role Simulator Section */
-.role-simulator {
-  padding: 20px;
-  background-color: #0f172a;
-  border-top: 1px solid #334155;
-  text-align: center;
-  font-size: 14px;
-}
-
-.role-simulator p {
+/* --- Go Home Button --- */
+.go-home-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #64748b;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 15px 25px;
   margin-bottom: 10px;
+  cursor: pointer;
+  transition: all 0.2s;
+  border-top: 1px solid #1e293b;
+  border-bottom: 1px solid #1e293b;
+  background-color: #0b1120;
+}
+
+.go-home-btn:hover {
+  color: #f8fafc;
+}
+
+/* --- Main Navigation Menu --- */
+.nav-menu {
+  list-style: none;
+  padding: 10px 15px; /* Adds padding so the hover pill doesn't touch the edges */
+  margin: 0;
+}
+
+.nav-label {
+  font-size: 11px;
+  font-weight: 700;
+  color: #475569;
+  letter-spacing: 1.2px;
+  margin: 20px 0 8px 10px;
+}
+
+.nav-menu li {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 15px;
+  margin-bottom: 5px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 15px;
+  border-radius: 10px; /* Modern pill shape */
+  font-weight: 500;
+}
+
+.nav-icon {
+  font-size: 18px;
+  opacity: 0.8;
+}
+
+.nav-menu li:hover {
+  background-color: #1e293b;
+  color: #f8fafc;
+}
+
+/* Active Tab Highlight */
+.nav-menu li.active {
+  background-color: rgba(56, 189, 248, 0.1);
+  color: #38bdf8;
+  font-weight: 600;
+}
+
+.nav-menu li.active .nav-icon {
+  opacity: 1;
+}
+
+/* --- Bottom Role Simulator Section --- */
+.sidebar-bottom {
+  padding: 20px;
+}
+
+.role-simulator {
+  background-color: #1e293b;
+  padding: 20px;
+  border-radius: 12px;
+  font-size: 13px;
+  border: 1px solid #334155;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+}
+
+.role-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #f8fafc;
+  font-weight: 700;
+  margin-bottom: 15px;
+  font-size: 14px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #334155;
+}
+
+.role-status {
+  margin-bottom: 15px;
   color: #94a3b8;
 }
 
-.role-simulator strong {
-  color: #f8fafc;
-}
+.text-admin { color: #f87171; }
+.text-visitor { color: #34d399; }
 
 .role-btn {
   width: 100%;
   padding: 10px;
   border: none;
-  border-radius: 5px;
+  border-radius: 8px;
   cursor: pointer;
-  font-weight: bold;
+  font-weight: 600;
+  font-size: 13px;
   transition: all 0.3s;
 }
 
 .admin-active {
+  background-color: rgba(239, 68, 68, 0.1);
+  color: #f87171;
+  border: 1px solid rgba(239, 68, 68, 0.3);
+}
+
+.admin-active:hover {
   background-color: #ef4444;
   color: white;
 }
 
-.admin-active:hover {
-  background-color: #dc2626;
-}
-
 .user-active {
-  background-color: #10b981;
-  color: white;
+  background-color: rgba(16, 185, 129, 0.1);
+  color: #34d399;
+  border: 1px solid rgba(16, 185, 129, 0.3);
 }
 
 .user-active:hover {
-  background-color: #059669;
+  background-color: #10b981;
+  color: white;
 }
