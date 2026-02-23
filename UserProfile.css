@@ -7,15 +7,23 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  max-width: 600px;
+  max-width: 800px; /* Made wider */
   margin-bottom: 25px;
 }
 
-/* Page Title handles both the flex row and standard views */
+.header-actions {
+  display: flex;
+  gap: 10px;
+}
+
+/* Page Title */
 .page-title {
   font-size: 28px;
   color: #0f172a;
   letter-spacing: -0.5px;
+}
+
+.profile-container > .page-title {
   margin-bottom: 25px;
 }
 
@@ -23,7 +31,7 @@
   background: white;
   padding: 40px;
   border-radius: 16px;
-  max-width: 600px;
+  max-width: 800px; /* Made wider */
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
   border: 1px solid #f1f5f9;
 }
@@ -33,7 +41,7 @@
   display: flex;
   align-items: center;
   gap: 24px;
-  margin-bottom: 35px;
+  margin-bottom: 30px;
   padding-bottom: 30px;
   border-bottom: 1px solid #f1f5f9;
 }
@@ -82,11 +90,28 @@
   border: 1px solid #bbf7d0;
 }
 
-/* Profile Data Details */
-.profile-details {
-  display: flex;
-  flex-direction: column;
+/* Section Headings */
+.section-title {
+  font-size: 14px;
+  color: #38bdf8;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin: 25px 0 20px;
+  font-weight: 700;
+}
+
+/* Profile Data Details (Now a Grid!) */
+.profile-details-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
   gap: 25px;
+  margin-bottom: 30px;
+}
+
+@media (max-width: 600px) {
+  .profile-details-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 .detail-group label {
@@ -106,10 +131,17 @@
 }
 
 /* Form Styles for Visitor Profile Creation/Editing */
-.profile-form {
-  display: flex;
-  flex-direction: column;
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
   gap: 20px;
+  margin-bottom: 10px;
+}
+
+@media (max-width: 600px) {
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 .form-group {
@@ -122,6 +154,10 @@
   font-weight: 600;
   color: #475569;
   font-size: 14px;
+}
+
+.required {
+  color: #ef4444;
 }
 
 .form-group input {
@@ -143,27 +179,31 @@
 
 .form-actions {
   display: flex;
+  justify-content: flex-end;
   gap: 15px;
-  margin-top: 10px;
+  margin-top: 20px;
+  padding-top: 25px;
+  border-top: 1px solid #f1f5f9;
 }
 
-.btn-save, .btn-edit, .btn-cancel {
-  padding: 14px 20px;
+/* Buttons */
+.btn-save, .btn-edit, .btn-cancel, .btn-delete-account {
+  padding: 12px 20px;
   border-radius: 10px;
   font-weight: 600;
   cursor: pointer;
-  font-size: 15px;
+  font-size: 14px;
   border: none;
   transition: all 0.2s;
 }
 
 .btn-save {
-  background: #10b981;
+  background: #0284c7;
   color: white;
-  flex-grow: 1;
+  box-shadow: 0 4px 10px rgba(2, 132, 199, 0.2);
 }
 
-.btn-save:hover { background: #059669; }
+.btn-save:hover { background: #0369a1; transform: translateY(-2px); }
 
 .btn-edit {
   background: #f1f5f9;
@@ -174,9 +214,25 @@
 .btn-edit:hover { background: #e2e8f0; }
 
 .btn-cancel {
+  background: white;
+  color: #64748b;
+  border: 1px solid #cbd5e1;
+}
+
+.btn-cancel:hover { background: #f1f5f9; }
+
+.btn-delete-account {
   background: #fef2f2;
   color: #dc2626;
   border: 1px solid #fecaca;
 }
 
-.btn-cancel:hover { background: #fee2e2; }
+.btn-delete-account:hover {
+  background: #dc2626;
+  color: white;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
