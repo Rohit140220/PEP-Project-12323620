@@ -8,17 +8,36 @@ import UserProfile from './UserProfile.jsx';
 import './App.css';
 
 export default function App() {
-  // Start the app on the 'home' page by default
   const [activeView, setActiveView] = useState('home');
   const [isAdmin, setIsAdmin] = useState(true); 
-  const [visitorProfile, setVisitorProfile] = useState(null); 
   
-  const [suppliers, setSuppliers] = useState([
-    { id: 1, name: 'TechNova Solutions', contact: 'alice@technova.com', category: 'Electronics', status: 'Active' },
-    { id: 2, name: 'Global Logistics', contact: 'bob@global.com', category: 'Shipping', status: 'Inactive' },
-  ]);
+  // 1. Load Profile from Local Storage (or start null)
+  const [visitorProfile, setVisitorProfile] = useState(() => {
+    const savedProfile = localStorage.getItem('vendorbase_profile');
+    return savedProfile ? JSON.parse(savedProfile) : null;
+  }); 
+  
+  // 2. Load Suppliers from Local Storage (or start with defaults)
+  const [suppliers, setSuppliers] = useState(() => {
+    const savedSuppliers = localStorage.getItem('vendorbase_suppliers');
+    if (savedSuppliers) return JSON.parse(savedSuppliers);
+    return [
+      { id: 1, name: 'TechNova Solutions', contact: 'alice@technova.com', category: 'Electronics', status: 'Active' },
+      { id: 2, name: 'Global Logistics', contact: 'bob@global.com', category: 'Shipping', status: 'Inactive' }
+    ];
+  });
 
-  // Security check: Kick non-admins out of the 'add' page
+  // 3. Save to Local Storage every time data changes!
+  useEffect(() => {
+    localStorage.setItem('vendorbase_suppliers', JSON.stringify(suppliers));
+  }, [suppliers]);
+
+  useEffect(() => {
+    if (visitorProfile) {
+      localStorage.setItem('vendorbase_profile', JSON.stringify(visitorProfile));
+    }
+  }, [visitorProfile]);
+
   useEffect(() => {
     if (!isAdmin && activeView === 'add') {
       setActiveView('dashboard');
@@ -34,39 +53,16 @@ export default function App() {
     setSuppliers(suppliers.filter((s) => s.id !== id));
   };
 
-  // If the view is 'home', ONLY show the full-screen landing page
-  if (activeView === 'home') {
-    return <Home setActiveView={setActiveView} />;
-  }
+  if (activeView === 'home') return <Home setActiveView={setActiveView} />;
 
-  // Otherwise, show the Dashboard layout with the Sidebar
   return (
     <div className="app-layout">
-      <Sidebar 
-        activeView={activeView} 
-        setActiveView={setActiveView} 
-        isAdmin={isAdmin} 
-        setIsAdmin={setIsAdmin} 
-      />
-      
+      <Sidebar activeView={activeView} setActiveView={setActiveView} isAdmin={isAdmin} setIsAdmin={setIsAdmin} />
       <main className="main-content">
         {activeView === 'dashboard' && <Dashboard suppliers={suppliers} />}
-        
-        {activeView === 'suppliers' && (
-          <SupplierTable suppliers={suppliers} onDelete={handleDelete} isAdmin={isAdmin} />
-        )}
-        
-        {activeView === 'add' && isAdmin && (
-          <SupplierForm onAdd={handleAddSupplier} />
-        )}
-
-        {activeView === 'profile' && (
-          <UserProfile 
-            isAdmin={isAdmin} 
-            visitorProfile={visitorProfile} 
-            setVisitorProfile={setVisitorProfile} 
-          />
-        )}
+        {activeView === 'suppliers' && <SupplierTable suppliers={suppliers} onDelete={handleDelete} isAdmin={isAdmin} />}
+        {activeView === 'add' && isAdmin && <SupplierForm onAdd={handleAddSupplier} />}
+        {activeView === 'profile' && <UserProfile isAdmin={isAdmin} visitorProfile={visitorProfile} setVisitorProfile={setVisitorProfile} />}
       </main>
     </div>
   );
