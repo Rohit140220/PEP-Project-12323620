@@ -1,17 +1,93 @@
+/* --- Main Container --- */
 .table-container {
   background: white;
   padding: 30px;
   border-radius: 16px;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
   border: 1px solid #f1f5f9;
+  animation: fadeIn 0.4s ease-in-out;
 }
 
-.table-container h2 {
-  margin-bottom: 25px;
+/* --- Header & Export Button --- */
+.table-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.table-header-row h2 {
   font-size: 24px;
   color: #0f172a;
+  margin: 0; /* Clears default margin so it aligns with the button */
 }
 
+.btn-export {
+  background: #f1f5f9;
+  color: #0f172a;
+  border: 1px solid #cbd5e1;
+  padding: 10px 16px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.btn-export:hover {
+  background: #e2e8f0;
+  border-color: #94a3b8;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+/* --- Search & Filter Toolbar --- */
+.table-toolbar {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 25px;
+  flex-wrap: wrap; /* Allows the boxes to stack neatly on mobile screens */
+}
+
+.search-input {
+  flex-grow: 1;
+  padding: 12px 16px;
+  border: 1px solid #cbd5e1;
+  border-radius: 10px;
+  font-size: 14px;
+  color: #0f172a;
+  background-color: #f8fafc;
+  transition: all 0.3s ease;
+}
+
+.filter-select {
+  padding: 12px 16px;
+  border: 1px solid #cbd5e1;
+  border-radius: 10px;
+  font-size: 14px;
+  color: #0f172a;
+  background-color: #f8fafc;
+  cursor: pointer;
+  min-width: 160px;
+  transition: all 0.3s ease;
+}
+
+.search-input:focus, .filter-select:focus {
+  outline: none;
+  border-color: #38bdf8;
+  background-color: white;
+  box-shadow: 0 0 0 4px rgba(56, 189, 248, 0.1);
+}
+
+/* --- Responsive Table Wrapper --- */
+.table-responsive {
+  overflow-x: auto; /* Adds a horizontal scrollbar only on tiny screens */
+  border-radius: 8px;
+}
+
+/* --- Core Table Styling --- */
 .data-table {
   width: 100%;
   border-collapse: collapse;
@@ -21,6 +97,7 @@
   padding: 16px 20px;
   text-align: left;
   border-bottom: 1px solid #f1f5f9;
+  white-space: nowrap; /* Keeps table data from squishing too much */
 }
 
 .data-table th {
@@ -41,6 +118,11 @@
   background-color: #f8fafc;
 }
 
+.data-table td strong {
+  color: #0f172a;
+}
+
+/* --- Badges & Buttons --- */
 .badge {
   padding: 6px 14px;
   border-radius: 20px;
@@ -49,10 +131,18 @@
   display: inline-block;
 }
 
-.badge.active { background: #dcfce7; color: #15803d; border: 1px solid #bbf7d0; }
-.badge.inactive { background: #fee2e2; color: #b91c1c; border: 1px solid #fecaca; }
+.badge.active { 
+  background: #dcfce7; 
+  color: #15803d; 
+  border: 1px solid #bbf7d0; 
+}
 
-/* Polished Button */
+.badge.inactive { 
+  background: #fee2e2; 
+  color: #b91c1c; 
+  border: 1px solid #fecaca; 
+}
+
 .btn-delete {
   background: #fef2f2;
   color: #dc2626;
@@ -69,4 +159,14 @@
   background: #dc2626; 
   color: white;
   box-shadow: 0 4px 10px rgba(220, 38, 38, 0.2);
+}
+
+/* --- Empty State --- */
+.empty-table {
+  text-align: center;
+  padding: 50px 20px !important;
+  color: #94a3b8;
+  font-style: italic;
+  font-size: 15px;
+  background-color: #f8fafc;
 }
