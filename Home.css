@@ -1,14 +1,16 @@
-/* Core Layout */
+/* =========================================
+   CORE LAYOUT
+   ========================================= */
 .home-container {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
   background-color: #f8fafc;
   font-family: 'Inter', sans-serif;
-  overflow-x: hidden; /* Prevents side-to-side scrolling */
+  overflow-x: hidden;
 }
 
-/* Home Navbar */
+/* --- Home Navbar --- */
 .home-nav {
   display: flex;
   justify-content: space-between;
@@ -37,7 +39,9 @@
 
 .btn-login:hover { background: #1e293b; }
 
-/* Hero Section */
+/* =========================================
+   HERO SECTION
+   ========================================= */
 .hero-section {
   text-align: center;
   padding: 100px 20px;
@@ -76,10 +80,11 @@
   box-shadow: 0 10px 20px rgba(56, 189, 248, 0.3);
 }
 
-/* Features Section */
+/* =========================================
+   FEATURES SECTION
+   ========================================= */
 .features-section {
   display: grid;
-  /* Auto-fit makes columns wrap automatically as screen shrinks */
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 30px;
   padding: 80px 50px;
@@ -112,7 +117,9 @@
   line-height: 1.6;
 }
 
-/* Footer Section */
+/* =========================================
+   FOOTER SECTION
+   ========================================= */
 .home-footer {
   background-color: #0f172a;
   color: white;
@@ -149,20 +156,22 @@
 .footer-column ul {
   list-style: none;
   padding: 0;
+  margin: 0;
 }
 
+/* Interactive Footer Links (THE FIX IS HERE) */
 .footer-column li {
-  margin-bottom: 10px;
-}
-
-.footer-column a {
+  margin-bottom: 12px;
   color: #94a3b8;
-  text-decoration: none;
-  transition: color 0.2s;
+  cursor: pointer; 
+  transition: color 0.2s, transform 0.2s;
+  display: block;          /* Forces them to stack vertically */
+  width: fit-content;      /* Keeps the hover box tight to the text */
 }
 
-.footer-column a:hover {
+.footer-column li:hover {
   color: #38bdf8;
+  transform: translateX(3px); 
 }
 
 .footer-bottom {
@@ -173,13 +182,106 @@
 }
 
 /* =========================================
-   MOBILE RESPONSIVENESS (The Fix!) 
+   MODAL POPUP STYLES
+   ========================================= */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(15, 23, 42, 0.6); 
+  backdrop-filter: blur(4px); 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000; 
+  animation: fadeIn 0.2s ease-out;
+}
+
+.modal-box {
+  background: white;
+  padding: 40px;
+  border-radius: 16px;
+  max-width: 500px;
+  width: 90%; 
+  position: relative;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+  animation: slideUp 0.3s ease-out;
+}
+
+.btn-close-modal {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: none;
+  border: none;
+  font-size: 16px;
+  color: #94a3b8;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.btn-close-modal:hover {
+  color: #ef4444;
+}
+
+.modal-box h2 {
+  color: #0f172a;
+  margin-bottom: 15px;
+  font-size: 24px;
+}
+
+.modal-divider {
+  height: 2px;
+  background: #f1f5f9;
+  width: 100%;
+  margin-bottom: 25px;
+}
+
+.modal-text {
+  color: #475569;
+  line-height: 1.6;
+  font-size: 16px;
+  margin-bottom: 30px;
+}
+
+.btn-modal-action {
+  width: 100%;
+  background: #0284c7;
+  color: white;
+  padding: 14px;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  font-size: 15px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.btn-modal-action:hover {
+  background: #0369a1;
+}
+
+/* Popup Animations */
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* =========================================
+   MOBILE RESPONSIVENESS
    ========================================= */
 
 /* For Tablets and smaller laptops */
 @media (max-width: 900px) {
   .footer-content {
-    grid-template-columns: 1fr 1fr; /* Stack footer into 2 columns */
+    grid-template-columns: 1fr 1fr; 
   }
   .features-section {
     padding: 60px 30px;
@@ -197,7 +299,7 @@
   }
   
   .hero-section h1 {
-    font-size: 32px; /* Shrink giant text */
+    font-size: 32px; 
   }
 
   .hero-section p {
@@ -206,11 +308,11 @@
 
   .features-section {
     padding: 40px 20px;
-    grid-template-columns: 1fr; /* Stack feature cards vertically */
+    grid-template-columns: 1fr; 
   }
 
   .footer-content {
-    grid-template-columns: 1fr; /* Stack all footer links vertically */
+    grid-template-columns: 1fr; 
     gap: 30px;
   }
 
