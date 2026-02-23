@@ -6,43 +6,71 @@ export default function Dashboard({ suppliers }) {
   const activeSuppliers = suppliers.filter(s => s.status === 'Active').length;
   const inactiveSuppliers = totalSuppliers - activeSuppliers;
 
-  // Grab the 3 most recently added suppliers (reverses the list and slices it)
-  const recentSuppliers = [...suppliers].reverse().slice(0, 3);
+  // Grab the 4 most recently added suppliers
+  const recentSuppliers = [...suppliers].reverse().slice(0, 4);
 
-  // Automatically count how many suppliers belong to each category
+  // Automatically count and calculate percentages for categories
   const categoryCounts = suppliers.reduce((acc, supplier) => {
     acc[supplier.category] = (acc[supplier.category] || 0) + 1;
     return acc;
   }, {});
 
+  // Sort categories from highest to lowest and calculate width percentage
+  const categoryData = Object.entries(categoryCounts)
+    .map(([name, count]) => ({
+      name,
+      count,
+      percentage: totalSuppliers > 0 ? Math.round((count / totalSuppliers) * 100) : 0
+    }))
+    .sort((a, b) => b.count - a.count);
+
+  // Get today's date formatted nicely
+  const today = new Date().toLocaleDateString('en-US', { 
+    weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' 
+  });
+
   return (
     <div className="dashboard-container">
-      <header className="dashboard-top">
-        <h1 className="page-title">System Overview</h1>
-        <p className="welcome-text">Here is a summary of your supply chain data today.</p>
+      <header className="dashboard-header">
+        <div>
+          <h1 className="page-title">System Overview</h1>
+          <p className="welcome-text">Supply chain analytics for {today}.</p>
+        </div>
+        <div className="header-actions">
+          <button className="btn-report">📄 Generate Report</button>
+        </div>
       </header>
 
       {/* Top Stat Cards */}
       <div className="stats-grid">
         <div className="stat-card">
-          <div className="stat-icon blue">📊</div>
-          <div>
+          <div className="stat-icon blue">📦</div>
+          <div className="stat-info">
             <h3>Total Suppliers</h3>
-            <p className="stat-number">{totalSuppliers}</p>
+            <div className="stat-value-row">
+              <p className="stat-number">{totalSuppliers}</p>
+              <span className="trend-badge positive">↑ 12%</span>
+            </div>
           </div>
         </div>
         <div className="stat-card">
           <div className="stat-icon green">✅</div>
-          <div>
+          <div className="stat-info">
             <h3>Active Partners</h3>
-            <p className="stat-number active-text">{activeSuppliers}</p>
+            <div className="stat-value-row">
+              <p className="stat-number active-text">{activeSuppliers}</p>
+              <span className="trend-badge positive">↑ 5%</span>
+            </div>
           </div>
         </div>
         <div className="stat-card">
           <div className="stat-icon red">⚠️</div>
-          <div>
-            <h3>Inactive Partners</h3>
-            <p className="stat-number inactive-text">{inactiveSuppliers}</p>
+          <div className="stat-info">
+            <h3>Inactive / Pending</h3>
+            <div className="stat-value-row">
+              <p className="stat-number inactive-text">{inactiveSuppliers}</p>
+              <span className="trend-badge negative">↓ 2%</span>
+            </div>
           </div>
         </div>
       </div>
@@ -50,17 +78,27 @@ export default function Dashboard({ suppliers }) {
       {/* Bottom Widgets Section */}
       <div className="dashboard-widgets">
         
-        {/* Widget 1: Category Breakdown */}
+        {/* Widget 1: Category Breakdown with Progress Bars */}
         <div className="widget-card">
-          <h3 className="widget-title">Suppliers by Category</h3>
+          <div className="widget-header">
+            <h3 className="widget-title">Industry Breakdown</h3>
+          </div>
           <div className="category-list">
-            {Object.keys(categoryCounts).length === 0 ? (
+            {categoryData.length === 0 ? (
               <p className="empty-text">No categories found.</p>
             ) : (
-              Object.entries(categoryCounts).map(([category, count]) => (
-                <div key={category} className="category-item">
-                  <span className="cat-name">{category}</span>
-                  <span className="cat-count">{count}</span>
+              categoryData.map((cat) => (
+                <div key={cat.name} className="category-item">
+                  <div className="cat-info">
+                    <span className="cat-name">{cat.name}</span>
+                    <span className="cat-count">{cat.count} ({cat.percentage}%)</span>
+                  </div>
+                  <div className="progress-track">
+                    <div 
+                      className="progress-fill" 
+                      style={{ width: `${cat.percentage}%` }}
+                    ></div>
+                  </div>
                 </div>
               ))
             )}
@@ -69,7 +107,9 @@ export default function Dashboard({ suppliers }) {
 
         {/* Widget 2: Recently Added Partners */}
         <div className="widget-card">
-          <h3 className="widget-title">Recently Added Partners</h3>
+          <div className="widget-header">
+            <h3 className="widget-title">Recent Onboarding</h3>
+          </div>
           <div className="recent-list">
             {recentSuppliers.length === 0 ? (
               <p className="empty-text">No recent activity.</p>
@@ -77,9 +117,11 @@ export default function Dashboard({ suppliers }) {
               recentSuppliers.map((supplier) => (
                 <div key={supplier.id} className="recent-item">
                   <div className="recent-avatar">{supplier.name.charAt(0)}</div>
-                  <div className="recent-info">
+                  <div className="recent-details">
                     <h4>{supplier.name}</h4>
-                    <p>{supplier.contact}</p>
+                    <a href={`mailto:${supplier.contact}`} className="recent-email">
+                      {supplier.contact}
+                    </a>
                   </div>
                   <span className={`badge ${supplier.status.toLowerCase()}`}>
                     {supplier.status}
